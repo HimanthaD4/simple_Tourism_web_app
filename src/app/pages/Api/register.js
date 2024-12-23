@@ -45,7 +45,7 @@ export default async function handler(req, res) {
       res.status(500).json({ message: 'Server error, please try again later' });
     }
   } else {
-    // Handle non-POST requests
+   
     res.status(405).json({ message: 'Method Not Allowed' });
   }
 }
