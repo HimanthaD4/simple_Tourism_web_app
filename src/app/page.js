@@ -31,7 +31,7 @@ const Home = () => {
     hotel.description.toLowerCase().includes(query.toLowerCase())
   );
 
-  // Handle showing login or register modal
+
   const handleModalToggle = (type) => {
     setShowModal({ ...showModal, [type]: !showModal[type] });
   };
