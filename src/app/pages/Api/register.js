@@ -1,13 +1,10 @@
 import { Pool } from 'pg';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-// Initialize the PostgreSQL connection pool
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-// Function to generate JWT token for the user
 const generateToken = (user) => {
   return jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, {
     expiresIn: '1h',
@@ -15,30 +12,18 @@ const generateToken = (user) => {
 };
 
 export default async function handler(req, res) {
-  // Only allow POST requests
   if (req.method === 'POST') {
-    // Extract fields from the request body
     const { name, email, password } = req.body;
 
-    // Check if required fields are provided
     if (!name || !email || !password) {
       return res.status(400).json({ message: 'All fields are required' });
     }
 
     try {
-      // Check if user already exists
-      const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
-      if (userExists.rows.length > 0) {
-        return res.status(400).json({ message: 'User already exists' });
-      }
-
-      // Hash the password before saving it
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Insert the new user into the database
+      // Insert the new user into the database (no email check, no password hashing)
       const result = await pool.query(
         'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *',
-        [name, email, hashedPassword]
+        [name, email, password]
       );
 
       const newUser = result.rows[0];
