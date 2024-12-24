@@ -1,5 +1,3 @@
-// components/Footer.js
-
 import React from 'react';
 import { FaFacebook, FaWhatsapp, FaInstagram } from 'react-icons/fa';
 
@@ -9,7 +7,7 @@ const Footer = () => {
       <div className="max-w-screen-lg mx-auto text-center">
         <h3 className="text-2xl font-semibold mb-4">About Us</h3>
         <p className="text-lg mb-6">
-          TripMe is dedicated to helping you plan the perfect vacation. We offer personalized travel experiences,
+          TripMe is dedicated to helping you plan the perfect vacation. We offer personalized travel experiences, 
           booking options for accommodations, and the best local insights to ensure you have an unforgettable journey.
         </p>
         <div className="flex justify-center space-x-6 mb-6">
